@@ -4,3 +4,10 @@
  (libraries core)
  (preprocess
   (pps ppx_jane)))
+
+; ignore [unused-value-declaration] warnings
+
+(env
+ (dev
+  (flags
+   (:standard -w -32))))
