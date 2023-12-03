@@ -1,1 +1,1 @@
-let () = Day2p1_better.solve ()
+let () = Day2.solve ()

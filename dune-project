@@ -5,7 +5,7 @@
 (generate_opam_files true)
 
 (source
- (github frangkli/aoc2023-ocaml))
+ (github frangkli/aoc2023))
 
 (authors "Frank Li")
 
