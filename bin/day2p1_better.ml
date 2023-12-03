@@ -4,8 +4,10 @@ open In_channel
 let file = "data/day2.full"
 let contains s1 s2 = String.is_substring ~substring:s2 s1
 
-let split_clear str char =
-  String.split str ~on:char |> List.filter ~f:(fun s -> not (String.is_empty s))
+let clean_split ?(on = ' ') str =
+  String.split str ~on
+  |> List.filter ~f:(fun s -> not (String.is_empty s))
+  |> List.map ~f:String.strip
 ;;
 
 let max_value = function
@@ -15,11 +17,11 @@ let max_value = function
   | _ -> raise (Invalid_argument "empty string")
 ;;
 
-let check_ball ball = Int.of_string ball.(0) <= max_value ball.(1)
+let check entry = Int.of_string entry.(0) <= max_value entry.(1)
 
 let check list =
-  let balls = split_clear list ',' in
-  List.map balls ~f:(fun s -> split_clear s ' ' |> Array.of_list |> check_ball)
+  let entries = clean_split list ~on:',' in
+  List.map entries ~f:(fun s -> clean_split s |> Array.of_list |> check)
   |> List.reduce_exn ~f:( && )
 ;;
 
@@ -28,15 +30,12 @@ let rec process_lines ic score =
   match line with
   | None -> score
   | Some line ->
-    let arr = String.split line ~on:':' in
-    let game_num =
-      Int.of_string (List.nth_exn (String.split (List.nth_exn arr 0) ~on:' ') 1)
-    in
-    let takes = List.nth_exn arr 1 in
-    let game = String.split takes ~on:';' in
+    let arr = clean_split line ~on:':' |> Array.of_list in
+    let game_num = Int.of_string (List.nth_exn (clean_split arr.(0)) 1) in
+    let game = clean_split arr.(1) ~on:';' in
     let ok = List.map game ~f:check |> List.reduce_exn ~f:( && ) in
     let res = if ok then game_num else 0 in
-    process_lines ic (res + score)
+    process_lines ic (score + res)
 ;;
 
 let solve () =
