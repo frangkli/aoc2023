@@ -1,1 +1,1 @@
-let () = Day2.solve ()
+let () = Day1.solve ()

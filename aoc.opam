@@ -3,9 +3,9 @@ opam-version: "2.0"
 maintainer: ["Frank Li"]
 authors: ["Frank Li"]
 license: "LICENSE"
-homepage: "https://github.com/frangkli/aoc2023-ocaml"
+homepage: "https://github.com/frangkli/aoc2023"
 doc: "https://url/to/documentation"
-bug-reports: "https://github.com/frangkli/aoc2023-ocaml/issues"
+bug-reports: "https://github.com/frangkli/aoc2023/issues"
 depends: [
   "ocaml"
   "dune" {>= "3.12"}
@@ -26,4 +26,4 @@ build: [
     "@doc" {with-doc}
   ]
 ]
-dev-repo: "git+https://github.com/frangkli/aoc2023-ocaml.git"
+dev-repo: "git+https://github.com/frangkli/aoc2023.git"
